@@ -1,0 +1,2 @@
+export const REDDIT_CLIENT_ID = "W-neK5lQAxd1HQ"
+export const REDDIT_CLIENT_SECRET = "LHHleWIH5Jxe9fwq2Y5ORGUNy_E"
