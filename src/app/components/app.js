@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { middleware } from "../store/createMiddleware"
 import configureStore from "../store/configureStore"
-import Subreddit from '../../components/subreddit';
-//import OAuthRequest from "../../../src/auth/components/oauthRequest"
-import rootReducer from "../reducers/index"
+import Subreddit from '../../interface/components/subreddit';
 import Authorization from "../../auth/components/authorization"
 import RetrieveAccessToken from "../../auth/containers/retrieve_access_token"
 
-export const store = configureStore(middleware);
 
+const store = configureStore(middleware);
 export default class App extends Component {
   render() {
     return(
