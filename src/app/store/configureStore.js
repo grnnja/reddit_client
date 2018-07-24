@@ -6,7 +6,7 @@ import throttle from "lodash/throttle";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export default (initialState) => {
   const persistedState = loadState()
-  let store =  createStore(rootReducer, persistedState, /* preloadedState, */ composeEnhancers(initialState),);
+  let store = createStore(rootReducer, persistedState, composeEnhancers(initialState));
 
   store.subscribe(throttle(() => {
         saveState({

@@ -4,12 +4,10 @@ import {connect} from 'react-redux'
 import { retrieveAccessToken } from "../actions/index" 
 
 const RetrieveAccessToken = (props) => {
-  
   const parsed_uri = qs.parse(props.location.search, { ignoreQueryPrefix: true })
   if(parsed_uri.state===props.redditState){
     props.retrieveAccessToken(parsed_uri.state, parsed_uri.code, (response) => {
-      console.log("response:", response)
-      this.props.history.push('/')
+      props.history.push('/r/all')
     });
     return(
       <div>Retrieving Access Token...</div>
@@ -20,7 +18,6 @@ const RetrieveAccessToken = (props) => {
     )
   }
 }
-
 
 function mapStateToProps(state){
   return { redditState: state.auth.redditState }
