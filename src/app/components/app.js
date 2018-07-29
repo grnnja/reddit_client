@@ -8,8 +8,9 @@ import Subreddit from '../../interface/components/subreddit';
 import Authorization from "../../auth/components/authorization"
 import RetrieveAccessToken from "../../auth/containers/retrieve_access_token"
 
-
 const store = configureStore(middleware);
+store.subscribe(() => {
+  console.log(store.getState())})
 export default class App extends Component {
   render() {
     return(
@@ -20,7 +21,6 @@ export default class App extends Component {
               <Route path="/r/:subreddit_name" component={Subreddit} />
               <Route path="/auth/reddit-redir" component={RetrieveAccessToken} />
               <Route path="/auth/" component={Authorization} />
-              
             </Switch>
           </div>
         </BrowserRouter>

@@ -5,6 +5,7 @@ export default (state = {}, action) => {
     case ACCESS_TOKEN:
       return {...state, accessToken: action.payload}
     case REDDIT_STATE:
+      console.log('state reducer called', action.payload)
       return {...state, redditState: action.payload}
     default:
       return state;

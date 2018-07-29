@@ -1,6 +1,7 @@
 import React, { Component} from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
+import Grid from '@material-ui/core/Grid'
 import { getPosts } from '../actions/index'
 import PostItem from '../components/postItem'
 
@@ -10,30 +11,37 @@ class PostList extends Component {
   }
 
   renderPosts() {
-
-    return _.map(this.props.posts, post => {
+    return _.map(this.props.interface.posts, post => {
       return(
-        <li key={post.data.id}>
-          <PostItem
-            post={post} />
-        </li>
+        <Grid
+          item={true}
+          xs={12}
+          sm={8}
+          key={post.data.id}
+          children={<PostItem
+              display_subreddit_names={(this.props.subreddit_name==='all')?true:false}
+            post={post.data} />} >
+        </Grid>
+
       )
     })
   }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('shouldComponentUpdate')
-  //   return false
-  // }
 
   render() {
     // let {posts} = this.props.interface
         console.log('this.props.posts', this.props)
     return(
-      <ul>
-        {this.renderPosts()}
-      </ul>
-      
+      <div style={{ padding: 8 }}>
+          <Grid
+            container={true}
+            direction='column'
+            justify='flex-start'
+            spacing={16}
+            alignItems='center'
+            alignContent='stretch'>
+            {this.renderPosts()}
+        </Grid>
+      </div>
     )
   }
 }

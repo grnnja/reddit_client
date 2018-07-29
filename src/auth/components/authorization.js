@@ -12,6 +12,7 @@ const DURATION = 'temporary'
 const SCOPE = 'identity'
 
 const Authorization = (props) => {
+
   const redditState = uuid4()
   props.saveRedditState(redditState)
   return(
