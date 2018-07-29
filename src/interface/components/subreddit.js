@@ -10,7 +10,7 @@ class Subreddit extends Component {
       <div>
         <h3>  r/{ subreddit_name }</h3>
         <PostList 
-        subreddit_name={subreddit_name}/>
+          subreddit_name={subreddit_name} />
       </div>
     )
   }
