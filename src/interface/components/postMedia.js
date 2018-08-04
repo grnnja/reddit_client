@@ -1,6 +1,8 @@
 import React from 'react'
-import './postMedia.css'
+import Typography from '@material-ui/core/Typography';
+import CardContent from '@material-ui/core/CardContent';
 
+import './postMedia.css'
 import YouTubeEmbed from './youTubeEmbed'
 
 const PostMedia = (props) => {
@@ -10,7 +12,7 @@ const PostMedia = (props) => {
         <img className='postMedia' src={props.post.url} alt=''/>
       )
     case 'link':
-      if(props.post.domain==='i.imgur.com') {
+      if(props.post.domain==='i.imgur.com'||props.post.domain==='imgur.com') {
         return(
             <video preload="auto" autoPlay="autPlay" loop="loop">
               <source src={`${props.post.url.slice(0,-5)}.mp4`} type="video/mp4" />
@@ -18,14 +20,16 @@ const PostMedia = (props) => {
           )
       } else {
         return(
-          <a href={props.post.url}>
-            {props.post.url}
-          </a>
+          <CardContent>
+            <a href={props.post.url}>
+              {props.post.url}
+            </a>
+          </CardContent>
         )
       }
     case 'hosted:video':
       return(
-        <video preload="auto" autoPlay="autoPlay" loop="loop" controls={true} >
+        <video className='postMedia' preload="auto" autoPlay="autoPlay" loop="loop" controls={true} >
           <source src={props.post.secure_media.reddit_video.fallback_url} type="video/mp4" />
         </video>
       )
@@ -35,7 +39,7 @@ const PostMedia = (props) => {
         const gfycat_url= new URL(props.post.url)
         console.log('gfycat url\t', gfycat_url.pathname)
         return(
-          <iframe src={`https://gfycat.com/ifr/${gfycat_url.pathname}`} frameBorder='0' scrolling='no' allowFullScreen></iframe>
+            <iframe title={gfycat_url.pathname} className='postMedia' src={`https://gfycat.com/ifr${gfycat_url.pathname}`} frameBorder='0' scrolling='no' allowFullScreen />
         )
       } else if (props.post.media.type==='youtube.com') {
           return(
@@ -54,14 +58,18 @@ const PostMedia = (props) => {
       )
     case undefined:
       return(
-        <div></div>
+        <CardContent>
+          <Typography>
+            {props.post.selftext}
+          </Typography>
+        </CardContent>
       )
     default:
       return(
-        <div>
+        <CardContent>
           {props.post.post_hint}
           {props.post.url}
-        </div>
+        </CardContent>
       )
   }
 }

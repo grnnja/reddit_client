@@ -13,7 +13,6 @@ export default class YouTubeEmbed extends Component {
     })
   }
   render(){
-    console.log('handleclick state:\t', this)
     if (this.state.playVideo) {
       return(
         <div className='youtube-player-wrapper'>
@@ -27,7 +26,7 @@ export default class YouTubeEmbed extends Component {
     } else {
       return(
         <div className='youtube-player' onClick={this.handleClick}>
-          <img src={`https://i.ytimg.com/vi/${this.props.id}/mqdefault.jpg`} />
+          <img src={`https://i.ytimg.com/vi/${this.props.id}/mqdefault.jpg`} alt='' />
           <div className='play' />
         </div>
       )

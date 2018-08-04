@@ -5,3 +5,8 @@ img {
 .card {
   max-width: 480px;
 }
+/* 
+.CardHeader:hover {
+  filter: brightness(80%);
+  cursor: pointer
+} */
