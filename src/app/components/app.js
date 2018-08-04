@@ -4,9 +4,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { middleware } from "../store/createMiddleware"
 import configureStore from "../store/configureStore"
-import Subreddit from '../../interface/components/subreddit';
+import PostWithComments from '../../interface/containers/postWithComments';
+import SubredditPosts from '../../interface/components/subredditPosts'
 import Authorization from "../../auth/components/authorization"
-import RetrieveAccessToken from "../../auth/containers/retrieve_access_token"
+import RetrieveAccessToken from "../../auth/containers/retrieveAccessToken"
 
 const store = configureStore(middleware);
 store.subscribe(() => {
@@ -16,13 +17,12 @@ export default class App extends Component {
     return(
       <Provider store={store} >
         <BrowserRouter>
-          <div>
             <Switch>
-              <Route path="/r/:subreddit_name" component={Subreddit} />
+              <Route path="/r/:subreddit_name/post/:post_id?" component={PostWithComments} />
+              <Route path="/r/:subreddit_name/" component={SubredditPosts} />
               <Route path="/auth/reddit-redir" component={RetrieveAccessToken} />
               <Route path="/auth/" component={Authorization} />
             </Switch>
-          </div>
         </BrowserRouter>
       </Provider>
     )

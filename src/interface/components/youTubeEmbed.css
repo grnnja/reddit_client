@@ -7,7 +7,7 @@
 .youtube-player-wrapper {
   position: relative;
 	padding-bottom: 56.25%; /* 16:9 */
-  min-width: 540px;
+  max-width: 100%;
 }
 .youtube-player-wrapper iframe {
   position: absolute;

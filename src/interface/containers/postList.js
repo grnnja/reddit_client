@@ -1,4 +1,4 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
@@ -19,7 +19,7 @@ class PostList extends Component {
           sm={8}
           key={post.data.id}
           children={<PostItem
-              display_subreddit_names={(this.props.subreddit_name==='all')?true:false}
+            display_subreddit_names={(this.props.subreddit_name==='all')?true:false}
             post={post.data} />} >
         </Grid>
 
@@ -28,8 +28,7 @@ class PostList extends Component {
   }
 
   render() {
-    // let {posts} = this.props.interface
-        console.log('this.props.posts', this.props)
+    console.log('this.props.posts', this.props)
     return(
       <div style={{ padding: 8 }}>
           <Grid
