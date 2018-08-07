@@ -1,13 +1,15 @@
 import React from 'react'
 import PostList from '../containers/postList'
-import withSubredditShell from './withSubredditShell'
+import SubredditTitle from './subredditTitle'
 
 const Subreddit = (props) => {
-  const { subreddit_name } = props.match.params;
-  const WrappedPostList = withSubredditShell(PostList)
-  return(
-    <WrappedPostList subreddit_name={subreddit_name} />
+  const { subredditName } = props.match.params;
+  return (
+    <div>
+      <SubredditTitle />
+      <PostList subredditName={subredditName} />
+    </div>
   )
 }
 
-export default Subreddit;
+export default Subreddit

@@ -1,32 +1,50 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { getPostWithComments } from '../actions/index'
-import withSubredditShell from '../components/withSubredditShell'
-import postItem from '../components/postItem'
+import { getPostWithComments, setCurrentPost, getComments } from '../actions/index'
+import SubredditTitle from '../components/subredditTitle'
+import PostItem from '../components/postItem'
+import CommentList from './commentList'
 
 class PostWithComments extends Component {
   componentDidMount() {
-    this.props.getPostWithComments(this.props.match.params.subreddit_name, this.props.match.params.post_id)
+    const { posts } = this.props.interface
+    const currentPost = posts && posts.find(post => post.data.id === this.props.match.params.postId)
+    if (currentPost) {
+      this.props.setCurrentPost(currentPost)
+    } else {
+      this.props.getPostWithComments(this.props.match.params.subredditName,
+        this.props.match.params.postId)
+    }
   }
 
-  render(){
-    const WrappedPost = withSubredditShell(postItem)
-    const { current_post } = this.props.interface
-    if(current_post!==undefined) {
-      return(
-        <WrappedPost post={current_post.children[0].data}/>
-      )
-    } else {
-      return(
-        <div>Loading...</div>
-      )
+  render() {
+    const { currentPost } = this.props.interface
+    // let returnHTML = '<div><SubredditTitle />'
+    if (currentPost) {
+      console.log('currentpost', currentPost)
+      if (currentPost.data.id === this.props.match.params.postId) {
+        return (
+          <div>
+            <SubredditTitle />
+            <PostItem post={currentPost.data} />
+            <CommentList />
+
+          </div>
+        )
+      }
     }
+    return (
+      <div>
+        Loading...
+      </div>
+    )
   }
 }
 const mapStateToProps = (state) => {
-  console.log('mapstatetoprops', state.interface.current_post)
-  return {interface: state.interface}
+  console.log('mapstatetoprops', state.interface.currentPost)
+  return { interface: state.interface }
 }
 
-export default connect(mapStateToProps, {getPostWithComments})(PostWithComments)
+export default connect(mapStateToProps,
+  { getPostWithComments, setCurrentPost, getComments })(PostWithComments)

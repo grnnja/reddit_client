@@ -2,25 +2,30 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
+import { withRouter } from 'react-router-dom'
 import { getPosts } from '../actions/index'
 import PostItem from '../components/postItem'
 
 class PostList extends Component {
   componentDidMount() {
-    this.props.getPosts(this.props.subreddit_name, 'hot')
+    let { sortType } = this.props.match.params
+    sortType = sortType || 'hot'
+    this.props.getPosts(this.props.subredditName, sortType)
   }
 
   renderPosts() {
-    return _.map(this.props.interface.posts, post => {
-      return(
+    return _.map(this.props.interface.posts, (post) => {
+      return (
         <Grid
-          item={true}
+          item
           xs={12}
           sm={8}
           key={post.data.id}
-          children={<PostItem
-            display_subreddit_names={(this.props.subreddit_name==='all')?true:false}
-            post={post.data} />} >
+        >
+          <PostItem
+            displaySubredditNames={this.props.subredditName === 'all'}
+            post={post.data}
+          />
         </Grid>
 
       )
@@ -28,17 +33,17 @@ class PostList extends Component {
   }
 
   render() {
-    console.log('this.props.posts', this.props)
-    return(
+    return (
       <div style={{ padding: 8 }}>
-          <Grid
-            container={true}
-            direction='column'
-            justify='flex-start'
-            spacing={16}
-            alignItems='center'
-            alignContent='stretch'>
-            {this.renderPosts()}
+        <Grid
+          container
+          direction="column"
+          justify="flex-start"
+          spacing={16}
+          alignItems="center"
+          alignContent="stretch"
+        >
+          {this.renderPosts()}
         </Grid>
       </div>
     )
@@ -46,7 +51,7 @@ class PostList extends Component {
 }
 
 function mapStateToProps(state) {
-  return {interface: state.interface}
+  return { interface: state.interface }
 }
 
-export default connect(mapStateToProps, { getPosts })(PostList)
+export default withRouter(connect(mapStateToProps, { getPosts })(PostList))
