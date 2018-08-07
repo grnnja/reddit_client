@@ -1,16 +1,18 @@
 import axios from 'axios'
 
 export const POSTS = 'POSTS'
-export const POST = 'POST'
+export const POST_AND_COMMENTS = 'POST_AND_COMMENTS'
+export const SET_POST = 'SET_POST'
+export const COMMENTS = 'COMMENTS'
 
-const server_url =  'http://localhost:3001/forward/'
+const serverUrl = 'http://localhost:3001/forward/'
 
-export function getPosts(subreddit, type){
+export function getPosts(subreddit, type) {
   const config = {
     method: 'get',
     url: `https://www.reddit.com/r/${subreddit}/${type}/.json?limit=25`
   }
-  const request = axios.post(server_url, config)
+  const request = axios.post(serverUrl, config)
   return {
     type: POSTS,
     payload: request
@@ -22,9 +24,28 @@ export function getPostWithComments(subreddit, id) {
     method: 'get',
     url: `https://www.reddit.com/r/${subreddit}/comments/${id}/.json`
   }
-  const request = axios.post(server_url, config)
+  const request = axios.post(serverUrl, config)
   return {
-    type: POST,
+    type: POST_AND_COMMENTS,
+    payload: request
+  }
+}
+
+export function setCurrentPost(post) {
+  return {
+    type: SET_POST,
+    payload: post
+  }
+}
+
+export function getComments(subreddit, id) {
+  const config = {
+    method: 'get',
+    url: `https://www.reddit.com/r/${subreddit}/comments/${id}/.json`
+  }
+  const request = axios.post(serverUrl, config)
+  return {
+    type: COMMENTS,
     payload: request
   }
 }

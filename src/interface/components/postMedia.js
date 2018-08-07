@@ -6,58 +6,68 @@ import './postMedia.css'
 import YouTubeEmbed from './youTubeEmbed'
 
 const PostMedia = (props) => {
-  switch(props.post.post_hint){
+  function getYouTubeId(url) {
+    let ID = '';
+    const newURL = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+    if (newURL[2] !== undefined) {
+      ID = newURL[2].split(/[^0-9a-z_\-]/i);
+      [ID] = ID;
+    } else {
+      ID = newURL;
+    }
+    return ID;
+  }
+  switch (props.post.post_hint) {
     case 'image':
-      return(
-        <img className='postMedia' src={props.post.url} alt=''/>
+      return (
+        <img className='postMedia' src={props.post.url} alt=""/>
       )
     case 'link':
-      if(props.post.domain==='i.imgur.com'||props.post.domain==='imgur.com') {
-        return(
+      if (props.post.domain === 'i.imgur.com' || props.post.domain === 'imgur.com') {
+        return (
             <video preload="auto" autoPlay="autPlay" loop="loop">
-              <source src={`${props.post.url.slice(0,-5)}.mp4`} type="video/mp4" />
+              <source src={`${props.post.url.slice(0, -5)}.mp4`} type="video/mp4" />
             </video>
-          )
-      } else {
-        return(
-          <CardContent>
-            <a href={props.post.url}>
-              {props.post.url}
-            </a>
-          </CardContent>
         )
       }
+      return (
+        <CardContent>
+          <a href={props.post.url}>
+            {props.post.url}
+          </a>
+        </CardContent>
+      )
     case 'hosted:video':
-      return(
+      return (
         <video className='postMedia' preload="auto" autoPlay="autoPlay" loop="loop" controls={true} >
           <source src={props.post.secure_media.reddit_video.fallback_url} type="video/mp4" />
         </video>
       )
     case 'rich:video':
-      console.log('rich:video case')
-      if(props.post.media.type==='gfycat.com') {
-        const gfycat_url= new URL(props.post.url)
-        console.log('gfycat url\t', gfycat_url.pathname)
-        return(
-            <iframe title={gfycat_url.pathname} className='postMedia' src={`https://gfycat.com/ifr${gfycat_url.pathname}`} frameBorder='0' scrolling='no' allowFullScreen />
-        )
-      } else if (props.post.media.type==='youtube.com') {
-          return(
-            <div className='postMedia'>
-              <YouTubeEmbed id={getYouTubeId(props.post.url)} />
-            </div>
-          )
-      } else {
-        return(
-          <div>Error: Unsupported rich:video type</div>
+      if (props.post.media.type === 'gfycat.com') {
+        const gfycatUrl = new URL(props.post.url)
+        return (
+          <iframe title={gfycatUrl.pathname} className="postMedia" src={`https://gfycat.com/ifr${gfycatUrl.pathname}`} frameBorder="0" scrolling="no" allowFullScreen />
         )
       }
+      if (props.post.media.type === 'youtube.com') {
+        return (
+          <div className='postMedia'>
+            <YouTubeEmbed id={getYouTubeId(props.post.url)} />
+          </div>
+        )
+      }
+      return (
+        <div>
+          Error: Unsupported rich:video type
+        </div>
+      )
     case 'self':
-      return(
-        <div></div>
+      return (
+        <div />
       )
     case undefined:
-      return(
+      return (
         <CardContent>
           <Typography>
             {props.post.selftext}
@@ -65,7 +75,7 @@ const PostMedia = (props) => {
         </CardContent>
       )
     default:
-      return(
+      return (
         <CardContent>
           {props.post.post_hint}
           {props.post.url}
@@ -76,18 +86,5 @@ const PostMedia = (props) => {
 // const gfycatGif(){
 
 // }
-
-function getYouTubeId(url){
-  var ID = '';
-  url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-  if(url[2] !== undefined) {
-    ID = url[2].split(/[^0-9a-z_\-]/i);
-    ID = ID[0];
-  }
-  else {
-    ID = url;
-  }
-    return ID;
-}
 
 export default PostMedia

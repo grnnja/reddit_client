@@ -1,14 +1,15 @@
-import { POSTS, POST } from '../actions/index'
+import { POSTS, POST_AND_COMMENTS, SET_POST, COMMENTS } from '../actions/index'
 
 export default (state = {}, action) => {
-  
-  switch(action.type) {
+  switch (action.type) {
     case POSTS:
-      return {...state, posts: action.payload.data.data.children}
-    case POST:
-      console.log('POST case\t', action.payload)
-      console.log('current_comments', action.payload.data[0].data)
-      return {...state, current_post: action.payload.data[0].data, current_comments: action.payload.data[1].data}
+      return { ...state, posts: action.payload.data.data.children }
+    case POST_AND_COMMENTS:
+      return { ...state, currentPost: action.payload.data[0].data.children[0], comments: action.payload.data[1].data }
+    case SET_POST:
+      return { ...state, currentPost: action.payload }
+    case COMMENTS:
+      return { ...state, comments: action.payload.data[1].data }
     default:
       return state;
   }
