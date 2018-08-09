@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 
 import { getPostWithComments, setCurrentPost, getComments } from '../actions/index'
 import SubredditTitle from '../components/subredditTitle'
@@ -28,8 +30,9 @@ class PostWithComments extends Component {
           <div>
             <SubredditTitle />
             <PostItem post={currentPost.data} />
-            <CommentList />
-
+            <CardContent>
+              <CommentList />
+            </CardContent>
           </div>
         )
       }
