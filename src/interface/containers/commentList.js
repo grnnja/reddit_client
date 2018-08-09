@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import { getComments } from '../actions/index'
-import CommentItem from '../components/commentItem'
+import DisplayComments from '../components/displayComments'
 
 class CommentList extends Component {
   componentDidMount() {
@@ -28,10 +28,9 @@ class CommentList extends Component {
         )
       }
       if (postId === comments.children[0].data.link_id.slice(3, 9)) {
+        console.log('before displayCommetns', comments)
         return (
-          <div>
-            <CommentItem />
-          </div>
+          <DisplayComments comments={comments.children} />
         )
       }
     }

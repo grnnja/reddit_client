@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import './youTubeEmbed.css'
 
 export default class YouTubeEmbed extends Component {
@@ -9,10 +9,11 @@ export default class YouTubeEmbed extends Component {
 
   handleClick = () => {
     this.setState({
-        playVideo: true
+      playVideo: true
     })
   }
-  render(){
+
+  render() {
     if (this.state.playVideo) {
       return(
         <div className='youtube-player-wrapper'>
@@ -23,14 +24,13 @@ export default class YouTubeEmbed extends Component {
             allowFullScreen="allowFullScreen" />
         </div>  
       )
-    } else {
-      return(
-        <div className='youtube-player' onClick={this.handleClick}>
-          <img src={`https://i.ytimg.com/vi/${this.props.id}/mqdefault.jpg`} alt='' />
-          <div className='play' />
-        </div>
-      )
     }
+    return(
+      <div className='youtube-player' onClick={this.handleClick}>
+        <img src={`https://i.ytimg.com/vi/${this.props.id}/mqdefault.jpg`} alt='' />
+        <div className='play' />
+      </div>
+    )
   }
 }
 

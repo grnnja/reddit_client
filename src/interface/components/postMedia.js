@@ -1,9 +1,17 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia'
+import { withStyles } from '@material-ui/core/styles'
 
 import './postMedia.css'
 import YouTubeEmbed from './youTubeEmbed'
+
+const styles = {
+  cardContent: {
+    paddingTop: 0
+  }
+}
 
 const PostMedia = (props) => {
   function getYouTubeId(url) {
@@ -17,21 +25,26 @@ const PostMedia = (props) => {
     }
     return ID;
   }
+
   switch (props.post.post_hint) {
     case 'image':
       return (
-        <img className='postMedia' src={props.post.url} alt=""/>
+        <CardMedia>
+          <img src={props.post.url} alt="" className="postMedia" />
+        </CardMedia>
       )
     case 'link':
       if (props.post.domain === 'i.imgur.com' || props.post.domain === 'imgur.com') {
         return (
-            <video preload="auto" autoPlay="autPlay" loop="loop">
-              <source src={`${props.post.url.slice(0, -5)}.mp4`} type="video/mp4" />
-            </video>
+          <CardMedia>
+              <video preload="auto" autoPlay="autPlay" loop="loop" className="postMedia">
+                <source src={`${props.post.url.slice(0, -5)}.mp4`} type="video/mp4" />
+              </video>
+          </CardMedia>
         )
       }
       return (
-        <CardContent>
+        <CardContent className={props.classes.cardContent}>
           <a href={props.post.url}>
             {props.post.url}
           </a>
@@ -39,28 +52,32 @@ const PostMedia = (props) => {
       )
     case 'hosted:video':
       return (
-        <video className='postMedia' preload="auto" autoPlay="autoPlay" loop="loop" controls={true} >
-          <source src={props.post.secure_media.reddit_video.fallback_url} type="video/mp4" />
-        </video>
+        <CardMedia>
+          <video className="postMedia" preload="auto" autoPlay="autoPlay" loop="loop" controls={true} >
+            <source src={props.post.secure_media.reddit_video.fallback_url} type="video/mp4" />
+          </video>
+        </CardMedia>
       )
     case 'rich:video':
       if (props.post.media.type === 'gfycat.com') {
         const gfycatUrl = new URL(props.post.url)
         return (
-          <iframe title={gfycatUrl.pathname} className="postMedia" src={`https://gfycat.com/ifr${gfycatUrl.pathname}`} frameBorder="0" scrolling="no" allowFullScreen />
+          <CardMedia>
+            <iframe title={gfycatUrl.pathname} className="postMedia" src={`https://gfycat.com/ifr${gfycatUrl.pathname}`} frameBorder="0" scrolling="no" allowFullScreen />
+          </CardMedia>
         )
       }
       if (props.post.media.type === 'youtube.com') {
         return (
-          <div className='postMedia'>
+          <CardMedia className="postMedia">
             <YouTubeEmbed id={getYouTubeId(props.post.url)} />
-          </div>
+          </CardMedia>
         )
       }
       return (
-        <div>
+        <CardContent className={props.classes.cardContent}>
           Error: Unsupported rich:video type
-        </div>
+        </CardContent>
       )
     case 'self':
       return (
@@ -68,7 +85,7 @@ const PostMedia = (props) => {
       )
     case undefined:
       return (
-        <CardContent>
+        <CardContent className={props.classes.cardContent}>
           <Typography>
             {props.post.selftext}
           </Typography>
@@ -76,15 +93,12 @@ const PostMedia = (props) => {
       )
     default:
       return (
-        <CardContent>
+        <CardContent className={props.classes.cardContent}>
           {props.post.post_hint}
           {props.post.url}
         </CardContent>
       )
   }
 }
-// const gfycatGif(){
 
-// }
-
-export default PostMedia
+export default withStyles(styles)(PostMedia)
