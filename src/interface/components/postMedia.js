@@ -29,14 +29,14 @@ const PostMedia = (props) => {
   switch (props.post.post_hint) {
     case 'image':
       return (
-        <CardMedia>
+        <CardMedia src={props.post.url}>
           <img src={props.post.url} alt="" className="postMedia" />
         </CardMedia>
       )
     case 'link':
       if (props.post.domain === 'i.imgur.com' || props.post.domain === 'imgur.com') {
         return (
-          <CardMedia>
+          <CardMedia src={props.post.url}>
               <video preload="auto" autoPlay="autPlay" loop="loop" className="postMedia">
                 <source src={`${props.post.url.slice(0, -5)}.mp4`} type="video/mp4" />
               </video>
@@ -52,7 +52,7 @@ const PostMedia = (props) => {
       )
     case 'hosted:video':
       return (
-        <CardMedia>
+        <CardMedia src={props.post.url}>
           <video className="postMedia" preload="auto" autoPlay="autoPlay" loop="loop" controls={true} >
             <source src={props.post.secure_media.reddit_video.fallback_url} type="video/mp4" />
           </video>
@@ -62,14 +62,14 @@ const PostMedia = (props) => {
       if (props.post.media.type === 'gfycat.com') {
         const gfycatUrl = new URL(props.post.url)
         return (
-          <CardMedia>
+          <CardMedia src={props.post.url}>
             <iframe title={gfycatUrl.pathname} className="postMedia" src={`https://gfycat.com/ifr${gfycatUrl.pathname}`} frameBorder="0" scrolling="no" allowFullScreen />
           </CardMedia>
         )
       }
       if (props.post.media.type === 'youtube.com') {
         return (
-          <CardMedia className="postMedia">
+          <CardMedia className="postMedia" src={props.post.url}>
             <YouTubeEmbed id={getYouTubeId(props.post.url)} />
           </CardMedia>
         )

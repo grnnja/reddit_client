@@ -7,6 +7,7 @@ import { getPosts } from '../actions/index'
 import PostItem from '../components/postItem'
 
 class PostList extends Component {
+
   componentDidMount() {
     let { sortType } = this.props.match.params
     sortType = sortType || 'hot'

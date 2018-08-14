@@ -3,10 +3,29 @@ img {
 }
 
 .card {
-  max-width: 480px;
 }
-/* 
-.CardHeader:hover {
-  filter: brightness(80%);
+ 
+.card:hover {
   cursor: pointer
-} */
+} 
+
+.singlePost {
+  left: var(--left);
+  position: fixed;
+  animation: singlePost;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes singlePost {
+  0% {
+    top: var(--top);
+    width: var(--width);
+    left: var(--left);
+  }
+  100% {
+    top: calc(64px + 1rem);
+    left: 0px;
+    width: 100%;
+  }
+}

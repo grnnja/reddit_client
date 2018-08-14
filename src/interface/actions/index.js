@@ -4,6 +4,7 @@ export const POSTS = 'POSTS'
 export const POST_AND_COMMENTS = 'POST_AND_COMMENTS'
 export const SET_POST = 'SET_POST'
 export const COMMENTS = 'COMMENTS'
+export const APPBAR_HEIGHT = 'APPBAR_HEIGHT'
 
 const serverUrl = 'http://localhost:3001/forward/'
 
@@ -47,5 +48,12 @@ export function getComments(subreddit, id) {
   return {
     type: COMMENTS,
     payload: request
+  }
+}
+
+export function setAppBarHeight(height) {
+  return {
+    type: APPBAR_HEIGHT,
+    payload: height
   }
 }
