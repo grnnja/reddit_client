@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
+import '../components/horizontalCenter.css'
 import { getComments } from '../actions/index'
 import DisplayComments from '../components/displayComments'
 
@@ -35,8 +37,8 @@ class CommentList extends Component {
       }
     }
     return (
-      <div>
-        Loading...
+      <div className="horizontalCenter">
+        <CircularProgress />
       </div>
     )
   }

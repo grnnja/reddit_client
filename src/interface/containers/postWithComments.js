@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Card from '@material-ui/core/Card'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import CardContent from '@material-ui/core/CardContent'
+
 
 import { getPostWithComments, setCurrentPost, getComments } from '../actions/index'
 import SubredditTitle from '../components/subredditTitle'
 import PostItem from '../components/postItem'
 import CommentList from './commentList'
+import '../components/horizontalCenter.css'
 
 class PostWithComments extends Component {
   componentDidMount() {
@@ -29,17 +31,23 @@ class PostWithComments extends Component {
         return (
           <div>
             <SubredditTitle />
-            <PostItem post={currentPost.data} />
-            <CardContent>
-              <CommentList />
-            </CardContent>
+            <p>
+              <PostItem post={currentPost.data} />
+              <CardContent>
+                <CommentList />
+              </CardContent>
+            </p>
           </div>
         )
       }
     }
     return (
       <div>
-        Loading...
+        <SubredditTitle />
+        <br />
+        <div className="horizontalCenter">
+          <CircularProgress />
+        </div>
       </div>
     )
   }

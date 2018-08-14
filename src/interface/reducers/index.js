@@ -1,4 +1,4 @@
-import { POSTS, POST_AND_COMMENTS, SET_POST, COMMENTS } from '../actions/index'
+import { POSTS, POST_AND_COMMENTS, SET_POST, COMMENTS, APPBAR_HEIGHT } from '../actions/index'
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -10,6 +10,8 @@ export default (state = {}, action) => {
       return { ...state, currentPost: action.payload }
     case COMMENTS:
       return { ...state, comments: action.payload.data[1].data }
+    case APPBAR_HEIGHT:
+      return { ...state, app_bar_height: action.payload }
     default:
       return state;
   }
