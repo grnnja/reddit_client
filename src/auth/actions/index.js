@@ -1,12 +1,12 @@
-import {REDDIT_CLIENT_SECRET, REDDIT_CLIENT_ID} from '../../constants'
 import axios from 'axios'
+import { REDDIT_CLIENT_SECRET, REDDIT_CLIENT_ID } from '../../constants'
 
 export const ACCESS_TOKEN = 'ACCESS_TOKEN'
 export const REDDIT_STATE = 'REDDIT_STATE'
 
-const server_url =  'http://localhost:3001/forward/'
+const serverUrl = 'http://localhost:3001/forward/'
 
-export function retrieveAccessToken(redditState,code,callback) {
+export function retrieveAccessToken(redditState, code, callback) {
   const config = {
     method: 'post',
     url: 'https://www.reddit.com/api/v1/access_token',
@@ -21,13 +21,13 @@ export function retrieveAccessToken(redditState,code,callback) {
   }
   const request = axios({
     method: 'post',
-    url: server_url,
+    url: serverUrl,
     data: config
   })
-  .then((response) => {
-    console.log(response)
-    callback(response)
-  })
+    .then((response) => {
+      console.log('response:', response)
+      callback(response)
+    })
   return {
     type: ACCESS_TOKEN,
     payload: request
@@ -35,7 +35,7 @@ export function retrieveAccessToken(redditState,code,callback) {
 }
 
 export function saveRedditState(redditState) {
-  return{
+  return {
     type: REDDIT_STATE,
     payload: redditState
   }

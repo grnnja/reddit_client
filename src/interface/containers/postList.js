@@ -3,8 +3,10 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import Grid from '@material-ui/core/Grid'
 import { withRouter } from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { getPosts } from '../actions/index'
 import PostItem from '../components/postItem'
+import '../components/horizontalCenter.css'
 
 class PostList extends Component {
 
@@ -34,6 +36,16 @@ class PostList extends Component {
   }
 
   render() {
+    if (!this.props.interface.posts) {
+      return (
+        <div>
+          <br />
+          <div className="horizontalCenter">
+            <CircularProgress />
+          </div>
+        </div>
+      )
+    }
     return (
       <div style={{ padding: 8 }}>
         <Grid
