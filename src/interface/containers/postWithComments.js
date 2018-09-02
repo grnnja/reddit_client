@@ -31,12 +31,11 @@ class PostWithComments extends Component {
         return (
           <div>
             <SubredditTitle />
-            <p>
-              <PostItem post={currentPost.data} />
-              <CardContent>
-                <CommentList />
-              </CardContent>
-            </p>
+            <br />
+            <PostItem post={currentPost.data} />
+            <CardContent>
+              <CommentList />
+            </CardContent>
           </div>
         )
       }

@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader'
 import CardActions from '@material-ui/core/CardActions'
-import IconButton from '@material-ui/core/IconButton'
-import ArrowUpward from '@material-ui/icons/ArrowUpward'
-import ArrowDownward from '@material-ui/icons/ArrowDownward'
 import { withRouter } from 'react-router-dom'
+import PostActions from './postActions'
 import './postItem.css';
 import PostMedia from './postMedia'
 
 class PostItem extends Component {
+
+
   constructor(props) {
     super(props)
     this.state = {
@@ -65,17 +65,11 @@ class PostItem extends Component {
           post={this.props.post}
         />
         <CardActions disableActionSpacing>
-          <IconButton>
-            <ArrowUpward />
-          </IconButton>
-          {this.props.post.score}
-          <IconButton>
-            <ArrowDownward />
-          </IconButton>
+          <PostActions {...this.props.post} />
         </CardActions>
       </Card>
     );
   }
-};
+}
 
 export default withRouter(PostItem)

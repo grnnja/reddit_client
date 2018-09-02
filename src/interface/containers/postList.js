@@ -9,11 +9,19 @@ import PostItem from '../components/postItem'
 import '../components/horizontalCenter.css'
 
 class PostList extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { sortType: this.props.match.params.sortType || 'hot' }
+  }
 
   componentDidMount() {
-    let { sortType } = this.props.match.params
-    sortType = sortType || 'hot'
-    this.props.getPosts(this.props.subredditName, sortType)
+    this.props.getPosts(this.props.subredditName, this.state.sortType, this.props.auth.accessToken)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.auth.accessToken !== this.props.auth.accessToken) {
+      this.props.getPosts(this.props.subredditName, this.state.sortType, this.props.auth.accessToken)
+    }
   }
 
   renderPosts() {
@@ -64,7 +72,11 @@ class PostList extends Component {
 }
 
 function mapStateToProps(state) {
-  return { interface: state.interface }
+  console.log('mapstatetoprops', state.auth.accessToken)
+  return {
+    interface: state.interface,
+    auth: state.auth
+  }
 }
 
 export default withRouter(connect(mapStateToProps, { getPosts })(PostList))

@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.upvote {
+  color: rgba(251,62,0);
+}
+
+.upvoteHover:hover {
+  color: rgba(251, 62, 0);
+}
+
+.downvote {
+  color: rgba(114, 146, 255)
+}
+
+.downvoteHover:hover {
+  color: rgba(114, 146, 255)
+}
+
+.archived {
+  filter: opacity(50%)
+}
