@@ -37,7 +37,7 @@ const PostMedia = (props) => {
       if (props.post.domain === 'i.imgur.com' || props.post.domain === 'imgur.com') {
         return (
           <CardMedia src={props.post.url}>
-              <video preload="auto" autoPlay="autPlay" loop="loop" className="postMedia">
+              <video preload="auto" autoPlay="autPlay" loop="loop" className="postMedia" controls>
                 <source src={`${props.post.url.slice(0, -5)}.mp4`} type="video/mp4" />
               </video>
           </CardMedia>
