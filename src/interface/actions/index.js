@@ -8,7 +8,7 @@ export const COMMENTS = 'COMMENTS'
 export const APPBAR_HEIGHT = 'APPBAR_HEIGHT'
 export const VOTE = 'UPVOTE'
 
-const makeServerRequest = (method, path, accessToken, data) => {
+const makeServerRequest = (method, path, accessToken, expireTime, data) => {
   let config = {
     method,
     url: `https://reddit.com/${path}`,
@@ -19,7 +19,9 @@ const makeServerRequest = (method, path, accessToken, data) => {
   }
 
   if (accessToken) {
-    config = {
+    const time = new Date().getTime()
+    //if (expireTime > time) 
+    config = { 
       ...config,
       url: `https://oauth.reddit.com/${path}`,
       headers: {
@@ -27,7 +29,8 @@ const makeServerRequest = (method, path, accessToken, data) => {
         Authorization: `bearer ${accessToken}`
       }
     }
-    console.log('config url', config.url)
+    console.log('axios config', config)
+    console.log('data', data)
   }
   const serverUrl = 'http://localhost:3001/forward/'
   return axios.post(serverUrl, config)
@@ -71,8 +74,8 @@ export function setAppBarHeight(height) {
   }
 }
 
-export function vote(id, direction, accessToken) {
-  makeServerRequest('post', 'api/vote', accessToken, {
+export function vote(id, direction, accessToken, expireTime) {
+  makeServerRequest('post', 'api/vote', accessToken, expireTime,{
     data: qs.stringify({
       dir: direction,
       id,
