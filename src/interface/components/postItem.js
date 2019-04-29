@@ -8,15 +8,15 @@ import './postItem.css';
 import PostMedia from './postMedia'
 
 class PostItem extends Component {
-
-
   constructor(props) {
     super(props)
     this.state = {
       transition: false,
       top: 0,
       left: 0,
-      width: 0
+      width: 0,
+      score: this.props.post.score,
+      likes: this.props.post.likes
     }
     this.setAnimationVariables = this.setAnimationVariables.bind(this)
   }
@@ -65,7 +65,14 @@ class PostItem extends Component {
           post={this.props.post}
         />
         <CardActions disableActionSpacing>
-          <PostActions {...this.props.post} />
+          <PostActions
+            {...this.props.post}
+            score={this.state.score}
+            likes={this.state.likes}
+            changeScore={(newScore, direction) => {
+              this.setState({ score: newScore, likes: direction })
+            }}
+          />
         </CardActions>
       </Card>
     );

@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom'
 // import { setAppBarHeight } from '../actions/index'
 
 import './subredditTitle.css'
+import AppBarProfile from '../containers/appBarProfile'
 
 const styles = {
   root: {
@@ -29,14 +30,15 @@ const SubredditTitle = (props) => {
     <div className={`${classes.root} subredditTitle`}>
       <AppBar position="static" color="primary">
         <Toolbar>
-          <Typography variant="title" color="inherit">
+          <Typography variant="title" color="inherit" className='grow'>
             r/
             {subredditName}
           </Typography>
+          <AppBarProfile />
         </Toolbar>
       </AppBar>
     </div>
   )
 }
 
-export default (withRouter(withStyles(styles)((SubredditTitle))))
+export default (withRouter(withStyles(styles)(SubredditTitle)))

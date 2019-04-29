@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux'
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
@@ -20,7 +20,8 @@ store.subscribe(() => {
 
 const theme = createMuiTheme({
   typography: {
-    fontfamily: 'Roboto'
+    fontfamily: 'Roboto',
+    fontWeightMedium: 500
   },
   palette: {
     primary: blue,
@@ -29,21 +30,26 @@ const theme = createMuiTheme({
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <BrowserRouter>
-          <ScrollToTop>
-            <Switch>
-              <Route path="/r/:subredditName/post/:postId?" component={PostWithComments} />
-              <Route path="/r/:subredditName/:sortType?" component={SubredditPosts} />
-              <Route path="/auth/reddit-redir" component={RetrieveAccessToken} />
-              <Route path="/auth/" component={Authorization} />
-            </Switch>
-          </ScrollToTop>
-        </BrowserRouter>
-      </MuiThemeProvider>
-    </Provider>
+    <div>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+      <Provider store={store}>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          <BrowserRouter>
+            <ScrollToTop>
+              <Switch>
+                <Route path="/r/:subredditName/post/:postId?" component={PostWithComments} />
+                <Route path="/r/:subredditName/:sortType?" component={SubredditPosts} />
+                <Route path="/auth/reddit-redir" component={RetrieveAccessToken} />
+                <Route path="/auth/" component={Authorization} />
+                <Redirect from="/" to="/r/all" />
+              </Switch>
+            </ScrollToTop>
+          </BrowserRouter>
+        </MuiThemeProvider>
+      </Provider>
+    </div>
   )
 }
 
