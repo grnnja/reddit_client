@@ -17,7 +17,7 @@ export default class YouTubeEmbed extends Component {
     if (this.state.playVideo) {
       return(
         <div className='youtube-player-wrapper'>
-          <iframe src={`https://www.youtube-nocookie.com/embed/${this.props.id}?autoplay=1&rel=0&modestbranding=1`} 
+          <iframe src={`https://www.youtube-nocookie.com/embed/${this.props.id}?rel=0`} 
             title={this.props.id}
             frameBorder="0" 
             allow="encrypted-media" 

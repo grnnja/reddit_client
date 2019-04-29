@@ -15,7 +15,6 @@ img {
   animation: singlePost;
   animation-duration: 300ms;
   animation-fill-mode: forwards;
-  z-index: 2
 }
 
 @keyframes singlePost {
@@ -25,7 +24,7 @@ img {
     left: var(--left);
   }
   100% {
-    top: calc(64px);
+    top: calc(64px + 1rem);
     left: 0px;
     width: 100%;
   }

@@ -4,10 +4,7 @@ export default (state = {}, action) => {
   switch (action.type) {
     case ACCESS_TOKEN:
       console.log('access token', action.payload.data)
-      const time = new Date().getTime()
-      console.log("time:", time)
-      const expireTime = time + action.payload.data.expires_in*1000
-      return { ...state, accessToken: action.payload.data.access_token, expireTime: expireTime }
+      return { ...state, accessToken: action.payload.data.access_token }
     case CLEAR_ACCESS_TOKEN:
       console.log('accesstoken cleared')
       return { ...state, accessToken: undefined }
