@@ -14,6 +14,7 @@ Key Libraries
 ### Server
 Key library
 * [Express](https://expressjs.com/)
+
 Needed a server to circumvent CORS
 * Acts a proxy
 * [Reddit authentication needs to come from a server for Reddit to consider the request legitimate](https://github.com/reddit-archive/reddit/wiki/oauth2#authorization-implicit-grant-flow "Reddit app types")
