@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux'
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
@@ -39,6 +39,7 @@ const App = () => {
               <Route path="/r/:subredditName/:sortType?" component={SubredditPosts} />
               <Route path="/auth/reddit-redir" component={RetrieveAccessToken} />
               <Route path="/auth/" component={Authorization} />
+              <Route path="/" render={()=>(<Redirect to = "/r/all" />)} />
             </Switch>
           </ScrollToTop>
         </BrowserRouter>

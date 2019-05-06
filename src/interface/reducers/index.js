@@ -1,4 +1,6 @@
-import { POSTS, POST_AND_COMMENTS, SET_POST, COMMENTS, APPBAR_HEIGHT, VOTE } from '../actions/index'
+import {
+  POSTS, POST_AND_COMMENTS, SET_POST, COMMENTS, APPBAR_HEIGHT, VOTE
+} from '../actions/index'
 
 export default (state = {}, action) => {
   console.log('reducer called', action.payload)
@@ -6,7 +8,10 @@ export default (state = {}, action) => {
     case POSTS:
       return { ...state, posts: action.payload.data.data.children }
     case POST_AND_COMMENTS:
-      return { ...state, currentPost: action.payload.data[0].data.children[0], comments: action.payload.data[1].data }
+      return {
+        ...state,
+        currentPost: action.payload.data[0].data.children[0],
+        comments: action.payload.data[1].data }
     case SET_POST:
       return { ...state, currentPost: action.payload }
     case COMMENTS:
@@ -16,7 +21,7 @@ export default (state = {}, action) => {
     case VOTE:
       if (action.payload.id.startsWith('t3')) {
         // maybe fix this so that it does not mutate state?
-        const postIndex = state.posts.findIndex((post, index) => {
+        state.posts.findIndex((post, index) => {
           if (post.data.name === action.payload.id) {
             let { score, likes } = state.posts[index].data
             switch (action.payload.direction) {

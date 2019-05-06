@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import uuid4 from 'uuid'
 
-import { REDDIT_CLIENT_ID } from '../../constants'
+import { REDDIT_CLIENT_ID } from '../../keys'
 import { saveRedditState } from '../actions/index'
 
 const ROOT_URL = 'https://ssl.reddit.com/api/v1/authorize?'
