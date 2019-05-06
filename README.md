@@ -1,8 +1,8 @@
 # Client for Reddit
 When I first started this project, the official desktop Reddit client looked dated, many image and video hosting sites were not supported, you could not infinitely scroll, and it lacked fullsize images like in the mobile experience.
 ## The problems that I solved:
-* Authenticating through OAuth2
-* Retrieving data from Reddit with JSON and the Reddit API
+* Authenticating through [OAuth2](https://github.com/reddit-archive/reddit/wiki/oauth2)
+* Retrieving data from Reddit with JSON and the [Reddit API](https://www.reddit.com/dev/api/)
 * Displaying different media formats from different sites
 * Linking the client and user to Reddit to upvote and downvote posts.
 ## Architecture
@@ -23,9 +23,8 @@ Key library
 1. Clone [client](https://github.com/grnnja/reddit_client) and [server](https://github.com/grnnja/reddit_oauth_proxy_server)
 2. Get a Reddit client ID and client secret from [Reddit](https://www.reddit.com/prefs/apps) by clicking "create an app" near the bottom of the page and choosing web app. The client ID is immediatly after "web app". To get the secret click "edit" and secret is the first entry.
 3. In the downloaded reddit_client repository open src/keys.js and change REDDIT_CLIENT_ID to the client ID and REDDIT_CLIENT_SECRET to the secret
-4. in the reddit_oauth_proxy_server director
-    1. run `npm install`
-    2. run `npm start` 
-5. in the reddit_client directory
-    1. run `npm install` 
-    2. run `npm start`
+4. in the reddit_oauth_proxy_server directory run `npm install`
+5. in the reddit_client directory run `npm install`
+## Running
+1. in the reddit_oauth_proxy_server directory run `npm start`
+2. in the reddit_client directory run `npm start`
